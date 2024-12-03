@@ -1,10 +1,10 @@
-import { BecButton } from "bec-react-components"
+import { InputTests } from "./components/InputTests";
 
 function App() {
   return (
     <>
-      <div>
-        <BecButton>Hello World</BecButton>
+      <div className="m-4 bg-gray-400 h-full">
+        <InputTests />
       </div>
     </>
   );
