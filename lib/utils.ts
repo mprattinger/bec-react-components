@@ -15,6 +15,8 @@ export interface ContainerPropsBase {
 export interface InputPropsBase<T> {
     id: string,
     label?: string,
+    placeholder?: string,
+    type: HTMLInputTypeAttribute,
     value: T,
     onChange: (value: T) => void
 }
