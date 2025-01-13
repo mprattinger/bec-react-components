@@ -1,4 +1,4 @@
-import { BecInputContainer } from "bec-react-components";
+import { BecInputContainer, BecLabel } from "bec-react-components";
 import { InputPropsBase } from "../../utils";
 
 interface BecCheckboxProps extends InputPropsBase<boolean> {}
@@ -6,7 +6,12 @@ interface BecCheckboxProps extends InputPropsBase<boolean> {}
 const BecCheckbox: React.FC<BecCheckboxProps> = (props) => {
   return (
     <BecInputContainer>
-      {props.label && <label htmlFor={props.id}>{props.label}</label>}
+      {props.label && (
+        <BecLabel
+          id={props.id}
+          label={props.label}
+        />
+      )}
       <input
         type="checkbox"
         id={props.id}

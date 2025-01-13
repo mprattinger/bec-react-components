@@ -1,4 +1,4 @@
-import { BecInputContainer } from "bec-react-components";
+import { BecInputContainer, BecLabel } from "bec-react-components";
 import { cn, InputPropsBase } from "../../utils";
 
 interface BecInputProps<T> extends InputPropsBase<T> {}
@@ -11,7 +11,12 @@ const BecInput = <T extends unknown>({ ...props }: BecInputProps<T>) => {
 
   return (
     <BecInputContainer>
-      {props.label && <label htmlFor={props.id}>{props.label}</label>}
+      {props.label && (
+        <BecLabel
+          id={props.id}
+          label={props.label}
+        />
+      )}
       <input
         id={props.id}
         placeholder={props.placeholder}

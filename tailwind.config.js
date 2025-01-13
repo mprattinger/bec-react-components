@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    './lib/**/*.{js,ts,jsx,tsx}'
+     './lib/**/*.{js,ts,jsx,tsx}',
+     './src/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
     extend: {
@@ -21,6 +22,9 @@ export default {
           700: "#3c3b41" //darkgray
         },
       },
+      width: {
+        'container': '1240px'
+      }
     },
   },
   plugins: [],

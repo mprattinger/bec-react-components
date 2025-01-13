@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { BecInput } from "bec-react-components";
+import { BecFormInput } from "bec-react-components";
 
 const testFormSchema = z
   .object({
@@ -36,7 +36,7 @@ const TestForm: React.FC = () => {
         className="flex flex-col gap-y-2 w-1/2 m-auto py-4"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <BecInput<TestFormSchema>
+        <BecFormInput<TestFormSchema>
           id="email"
           type="text"
           name="email"
@@ -44,7 +44,7 @@ const TestForm: React.FC = () => {
           placeHolder="Email"
           errors={errors}
         />
-        <BecInput<TestFormSchema>
+        <BecFormInput<TestFormSchema>
           id="password"
           type="password"
           name="password"
@@ -52,7 +52,7 @@ const TestForm: React.FC = () => {
           placeHolder="Password"
           errors={errors}
         />
-        <BecInput<TestFormSchema>
+        <BecFormInput<TestFormSchema>
           id="confirmPassword"
           type="password"
           name="confirmPassword"

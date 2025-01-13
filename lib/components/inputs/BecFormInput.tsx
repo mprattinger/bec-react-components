@@ -1,4 +1,4 @@
-import { BecInputContainer } from "bec-react-components";
+import { BecInputContainer, BecLabel } from "bec-react-components";
 import { cn, ValidatableInputPropsBase } from "../../utils";
 import { FieldValues } from "react-hook-form";
 
@@ -14,7 +14,12 @@ const BecFormInput = <T extends FieldValues>({
 }: BecFormInputProps<T>) => {
   return (
     <BecInputContainer>
-      {props.label && <label htmlFor={props.id}>{props.label}</label>}
+      {props.label && (
+        <BecLabel
+          id={props.id}
+          label={props.label}
+        />
+      )}
       <input
         className={cn(
           "bg-none outline-none text-black border-b border-b-solid border-b-becgray-200 m-0 p-0 text-sm text-left w-full focus:font-normal focus:border-b-becblue-200 invalid:border invalid:border-red-500",

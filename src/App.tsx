@@ -1,5 +1,4 @@
 import { TestForm } from "./components/FormTest";
-import "../dist/style.css";
 
 function App() {
   return (

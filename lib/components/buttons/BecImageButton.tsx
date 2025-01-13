@@ -1,9 +1,9 @@
-import React, { ButtonHTMLAttributes, forwardRef } from "react";
-import { VariantProps, cva } from "class-variance-authority";
+import { cva, VariantProps } from "class-variance-authority";
+import { ButtonHTMLAttributes, forwardRef } from "react";
 import { cn } from "../../utils";
 
-const BecButtonVariants = cva(
-  "flex border-none rounded-sm text-sm justify-around items-center box-border text-white outline-none h-6 enabled:active:scale-95 disabled:opacity-50 font-sans",
+const BecImageButtonVariants = cva(
+  "flex border-none rounded-sm text-sm justify-around items-center box-border text-white outline-none h-6 enabled:active:scale-95 disabled:opacity-50 w-7 h-7",
   {
     variants: {
       variant: {
@@ -25,12 +25,16 @@ const BecButtonVariants = cva(
   },
 );
 
-interface BecButtonProps
+interface BecImageButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof BecButtonVariants> {}
+    VariantProps<typeof BecImageButtonVariants> {
+  altText?: string;
+  imgSrc: string;
+  keyboardKey?: string;
+}
 
-const BecButton = forwardRef<HTMLButtonElement, BecButtonProps>(
-  ({ className, size, variant, onClick, ...props }, ref) => {
+const BecImageButton = forwardRef<HTMLButtonElement, BecImageButtonProps>(
+  ({ className, size, variant, onClick, altText, imgSrc, ...props }, ref) => {
     const buttonClickedHandler = (ev: React.MouseEvent<HTMLButtonElement>) => {
       if (onClick) {
         ev.preventDefault();
@@ -42,12 +46,17 @@ const BecButton = forwardRef<HTMLButtonElement, BecButtonProps>(
     return (
       <button
         ref={ref}
-        className={cn(BecButtonVariants({ variant, size, className }))}
+        className={cn(BecImageButtonVariants({ variant, size, className }))}
         {...props}
         onClick={buttonClickedHandler}
-      />
+      >
+        <img
+          src={imgSrc}
+          alt={altText && "Image"}
+        />
+      </button>
     );
   },
 );
 
-export { BecButton, BecButtonVariants };
+export { BecImageButton };
