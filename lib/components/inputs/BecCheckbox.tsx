@@ -1,5 +1,6 @@
 import { BecInputContainer, BecLabel } from "bec-react-components";
 import { InputPropsBase } from "../../utils";
+import { BecInputError } from "../outputs/BecInputError";
 
 interface BecCheckboxProps extends InputPropsBase<boolean> {}
 
@@ -18,6 +19,7 @@ const BecCheckbox: React.FC<BecCheckboxProps> = (props) => {
         checked={props.value}
         onClick={() => props.onChange(!props.value)}
       />
+      {props.error && <BecInputError error={props.error} />}
     </BecInputContainer>
   );
 };

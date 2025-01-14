@@ -28,6 +28,7 @@ const BecFormInput = <T extends FieldValues>({
         {...register(name)}
         type={props.type}
         placeholder={placeHolder}
+        {...props}
       />
       {errors[name] && (
         <span className="text-red-500 text-xs">

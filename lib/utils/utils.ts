@@ -1,3 +1,4 @@
+import { ApplicationError } from "bec-react-components";
 import { ClassValue, clsx } from "clsx";
 import { HTMLInputTypeAttribute, ReactNode } from "react";
 import {
@@ -24,6 +25,7 @@ export interface InputPropsBase<T> {
   type?: HTMLInputTypeAttribute;
   value: T;
   onChange: (value: T) => void;
+  error?: ApplicationError;
 }
 
 export interface ValidatableInputPropsBase<T extends FieldValues> {
@@ -34,4 +36,17 @@ export interface ValidatableInputPropsBase<T extends FieldValues> {
   name: Path<T>;
   register: UseFormRegister<T>;
   errors: FieldErrors<T>;
+  error?: ApplicationError;
+}
+
+export interface IData {
+  dataId: string;
+}
+
+export function getProperty<T>(obj: T, key: keyof T): T[keyof T] {
+  return obj[key];
+}
+
+export function getPropertyByString<T>(obj: T, key: string): any {
+  return obj[key as keyof T];
 }
