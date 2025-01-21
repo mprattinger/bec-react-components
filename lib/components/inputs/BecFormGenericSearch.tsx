@@ -7,20 +7,11 @@ import {
   BecLabel,
   cn,
   getPropertyByString,
-  IData,
 } from "bec-react-components";
-import {
-  FieldErrors,
-  FieldValues,
-  Path,
-  UseFormRegister,
-} from "react-hook-form";
 
-export interface IFormGenericSearchProps<
-  T extends IData,
-  V extends FieldValues,
-> {
+export interface IFormGenericSearchProps<T extends object> {
   id: string;
+  name: string;
   label?: string;
   mandant: number;
   searchData: (
@@ -33,21 +24,15 @@ export interface IFormGenericSearchProps<
   displayProperty: string;
   children: (data: T, idx: number) => ReactNode;
   listClassName?: string;
-  name: Path<V>;
-  register: UseFormRegister<V>;
-  errors: FieldErrors<V>;
   placeHolder?: string;
   preFillValue?: T;
   setFormValue?: (data: T) => void;
+  validationError?: string;
 }
 
-export function BecFormGenericSearch<T extends IData, V extends FieldValues>({
-  name,
-  register,
-  errors,
-  placeHolder,
+export function BecFormGenericSearch<T extends object>({
   ...props
-}: IFormGenericSearchProps<T, V>) {
+}: IFormGenericSearchProps<T>) {
   const [data, setData] = useState<T[]>([]);
   const [valueInternal, setValueInternal] = useState<string>(
     props.preFillValue === undefined
@@ -115,6 +100,7 @@ export function BecFormGenericSearch<T extends IData, V extends FieldValues>({
   const clearData = () => {
     setData([]);
     setActiveId(0);
+
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     props.clearCache && props.clearCache();
   };
@@ -158,10 +144,6 @@ export function BecFormGenericSearch<T extends IData, V extends FieldValues>({
     };
   }, []);
 
-  // useEffect(() => {
-  //   setValueInternal(props.displayValue);
-  // }, [props.displayValue]);
-
   return (
     <BecInputContainer>
       <div
@@ -175,7 +157,6 @@ export function BecFormGenericSearch<T extends IData, V extends FieldValues>({
           />
         )}
         <input
-          {...register(name)}
           id={props.id}
           autoComplete="off"
           value={valueInternal}
@@ -185,11 +166,10 @@ export function BecFormGenericSearch<T extends IData, V extends FieldValues>({
           onFocus={(e) => e.target.select()}
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
-          onBlur={(e) => {
-            setData([]);
-            register(name).onBlur(e);
+          onBlur={() => {
+            // setData([]);
           }}
-          placeholder={placeHolder}
+          placeholder={props.placeHolder}
           className={cn(
             "bg-none outline-none text-black border-b border-b-solid m-0 p-0 text-sm text-left w-full focus:font-normal  invalid:border invalid:border-red-500",
             error === null
@@ -215,7 +195,8 @@ export function BecFormGenericSearch<T extends IData, V extends FieldValues>({
               }`}
               onClick={(e) => {
                 populatedValue(d);
-                e.stopPropagation();
+                e.preventDefault();
+                clearData();
               }}
             >
               {props.children(d, idx)}
@@ -223,10 +204,8 @@ export function BecFormGenericSearch<T extends IData, V extends FieldValues>({
           ))}
         </ul>
         {error && <BecInputError error={error} />}
-        {errors[name] && (
-          <BecFormInputError>
-            {errors[name]?.message?.toString()}
-          </BecFormInputError>
+        {props.validationError && (
+          <BecFormInputError>{props.validationError}</BecFormInputError>
         )}
       </div>
     </BecInputContainer>

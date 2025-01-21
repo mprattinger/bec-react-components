@@ -3,4 +3,4 @@ export * from "./BecFormInput";
 export * from "./BecInput";
 export * from "./BecDropdown";
 export * from "./BecGenericSearch";
-export * from "./BecFormGenericSearch";
+export * from "./BecFormGenericSearch.tsx";
