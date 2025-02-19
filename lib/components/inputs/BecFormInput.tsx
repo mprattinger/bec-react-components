@@ -28,6 +28,7 @@ const BecFormInput = <T extends FieldValues>({
         {...register(name)}
         type={props.type}
         placeholder={placeHolder}
+        autoComplete="off"
         {...props}
       />
       {errors[name] && (

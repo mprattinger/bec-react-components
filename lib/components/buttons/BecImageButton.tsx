@@ -31,6 +31,7 @@ interface BecImageButtonProps
   altText?: string;
   imgSrc: string;
   keyboardKey?: string;
+  imageStyle?: string;
 }
 
 const BecImageButton = forwardRef<HTMLButtonElement, BecImageButtonProps>(
@@ -53,6 +54,7 @@ const BecImageButton = forwardRef<HTMLButtonElement, BecImageButtonProps>(
         <img
           src={imgSrc}
           alt={altText && "Image"}
+          className={props.imageStyle ?? ""}
         />
       </button>
     );

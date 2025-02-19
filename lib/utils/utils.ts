@@ -18,14 +18,18 @@ export interface ContainerPropsBase {
   children: ReactNode | ReactNode[];
 }
 
-export interface InputPropsBase<T> {
+export interface BecControlPropsBase {
   id: string;
   label?: string;
+}
+
+export interface InputPropsBase<T> extends BecControlPropsBase {
   placeholder?: string;
   type?: HTMLInputTypeAttribute;
   value: T;
   onChange: (value: T) => void;
   error?: ApplicationError;
+  className?: string;
 }
 
 export interface ValidatableInputPropsBase<T extends FieldValues> {
@@ -49,4 +53,8 @@ export function getProperty<T>(obj: T, key: keyof T): T[keyof T] {
 
 export function getPropertyByString<T>(obj: T, key: string): any {
   return obj[key as keyof T];
+}
+
+export function isEqual(a: unknown, b: unknown): boolean {
+  return JSON.stringify(a) === JSON.stringify(b);
 }

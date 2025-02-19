@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { ReactNode, useEffect, useRef, useState } from "react";
 import {
   ApplicationError,
@@ -26,6 +28,7 @@ export interface IFormGenericSearchProps<T extends object> {
   listClassName?: string;
   placeHolder?: string;
   preFillValue?: T;
+  resetValue?: () => void;
   setFormValue?: (data: T) => void;
   validationError?: string;
 }
@@ -65,11 +68,13 @@ export function BecFormGenericSearch<T extends object>({
       currentText.length < props.searchTermMinLength
     ) {
       clearData();
+      props.resetValue && props.resetValue();
       return;
     }
 
     if (currentText === "") {
       clearData();
+      props.resetValue && props.resetValue();
       return;
     }
 
@@ -101,7 +106,6 @@ export function BecFormGenericSearch<T extends object>({
     setData([]);
     setActiveId(0);
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     props.clearCache && props.clearCache();
   };
 
@@ -110,7 +114,7 @@ export function BecFormGenericSearch<T extends object>({
       const v = getPropertyByString(value, props.displayProperty);
       setValueInternal(v.toString());
     }
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+
     props.setFormValue && props.setFormValue(value);
   };
 
@@ -162,6 +166,9 @@ export function BecFormGenericSearch<T extends object>({
           value={valueInternal}
           onChange={(e) => {
             setValueInternal(e.target.value);
+            if (e.target.value === "") {
+              props.resetValue && props.resetValue();
+            }
           }}
           onFocus={(e) => e.target.select()}
           onKeyDown={handleKeyDown}

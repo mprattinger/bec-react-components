@@ -24,8 +24,10 @@ const BecInput = <T extends unknown>({ ...props }: BecInputProps<T>) => {
         type={props.type}
         value={props.value as unknown as string}
         onChange={handleChange}
+        autoComplete="off"
         className={cn(
           "bg-none outline-none text-black border-b border-b-solid border-b-becgray-200 m-0 p-0 text-sm text-left w-full focus:font-normal focus:border-b-becblue-200 invalid:border invalid:border-red-500",
+          props.className,
         )}
       />
       {props.error && <BecInputError error={props.error} />}
